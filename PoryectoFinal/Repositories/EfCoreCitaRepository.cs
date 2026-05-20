@@ -6,13 +6,18 @@ using PoryectoFinal.Models;
 namespace PoryectoFinal.Repositories;
 
 
-public class EfCoreCitaRepository(AppDbContext context) : ICitaRepository
+public class EfCoreCitaRepository(AppDbContext context, IVehiculoRepository vehiculoRepo) : ICitaRepository
 {
     const int tamañoPagina = 10;
     
     public Cita? GetById(int id)
     {
-        return context.Citas.Find(id);
+        var output =  context.Citas.Find(id);
+        
+        if (output == null) return null;
+        
+        output.Vehiculo = vehiculoRepo.GetByMatricula(output.Matricula);
+        return output;
     }
 
     public void Create(Cita cita)
