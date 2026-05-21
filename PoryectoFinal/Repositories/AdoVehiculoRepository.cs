@@ -51,7 +51,7 @@ public class AdoVehiculoRepository(SqliteConnection conexion) : IVehiculoReposit
         command.Parameters.AddWithValue("@Marca", vehiculo.Marca);
         command.Parameters.AddWithValue("@Modelo", vehiculo.Modelo);
         command.Parameters.AddWithValue("@Motor", (int)vehiculo.Motor);
-        command.Parameters.AddWithValue("@FechaMatriculacion", vehiculo.FechaMatriculacion.ToString("yyyy-MM-dd"));
+        command.Parameters.AddWithValue("@FechaMatriculacion", vehiculo.FechaMatriculacion.ToString("o"));
         command.Parameters.AddWithValue("@UpdatedAt", DateTime.Now.ToString("o"));
         
         command.ExecuteNonQuery();

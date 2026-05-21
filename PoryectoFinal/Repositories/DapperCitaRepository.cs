@@ -47,7 +47,7 @@ public class DapperCitaRepository(IDbConnection conexion, IVehiculoRepository ve
             Matricula = cita.Matricula,
             FechaInspeccion = cita.FechaInspeccion,
             IsDeleted = cita.IsDeleted,
-            UpdatedAt = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"),
+            UpdatedAt = DateTime.Now.ToString("o"),
             Id = id
         });
     }

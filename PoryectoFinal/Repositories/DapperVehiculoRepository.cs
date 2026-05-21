@@ -44,8 +44,8 @@ public class DapperVehiculoRepository(IDbConnection conexion) : IVehiculoReposit
             Marca = vehiculo.Marca,
             Modelo =  vehiculo.Modelo,
             Motor = (int)vehiculo.Motor,
-            FechaMatriculacion = vehiculo.FechaMatriculacion.ToString("yyyy-MM-dd"),
-            UpdatedAt = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"),
+            FechaMatriculacion = vehiculo.FechaMatriculacion.ToString("o"),
+            UpdatedAt = DateTime.Now.ToString("o"),
             XMatricula = matricula
         });
     }
