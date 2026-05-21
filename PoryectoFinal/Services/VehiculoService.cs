@@ -25,10 +25,7 @@ public class VehiculoService(IVehiculoRepository vehiculoRepo) : IVehiculoServic
         ValidarVehiculo(vehiculo);
         
         var vehiculoExists = vehiculoRepo.GetByMatricula(matricula);
-        if (vehiculoExists == null)
-        {
-            throw new ArgumentException("No vehiculo para esta matricula");
-        }
+        if (vehiculoExists == null) throw new ArgumentException("No vehiculo para esta matricula");
         
         vehiculoRepo.Update(vehiculo, matricula);
     }

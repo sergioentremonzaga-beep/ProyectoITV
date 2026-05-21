@@ -12,6 +12,6 @@ public class VehiculoMapper : IMapper<Vehiculo, VehiculoDTO>
 
     public VehiculoDTO ToDto(Vehiculo vehiculo)
     {
-        return new VehiculoDTO(vehiculo.Matricula, vehiculo.Modelo, vehiculo.Modelo, vehiculo.Motor.ToString(), vehiculo.FechaMatriculacion.ToShortDateString());
+        return new VehiculoDTO(vehiculo.Matricula, vehiculo.Marca, vehiculo.Modelo, vehiculo.Motor.ToString(), vehiculo.FechaMatriculacion.ToShortDateString());
     }
 }

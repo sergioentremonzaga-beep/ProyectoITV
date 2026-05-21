@@ -17,10 +17,15 @@ public class CitaService(ICitaRepository citaRepo, IVehiculoRepository vehiculoR
         ValidarCita(cita);
         
         var vehiculo = vehiculoRepo.GetByMatricula(cita.Matricula);
-        if (vehiculo == null)
-        {
-            throw new ArgumentException("No existe vehiculo para esta matricula");
-        }
+        if (vehiculo == null) throw new ArgumentException("No existe vehiculo para esta matricula");
+        
+        var citasVehiculoMismoDia = citaRepo.Consultar(cita.Matricula, null, null, null ,null , cita.FechaInspeccion, null, 1);
+
+        if (citasVehiculoMismoDia.Count != 0) throw new ArgumentException("No pueden registrarse dos citas para el mismo vehiculo el mismo dia");
+        
+        var citasPropietarioMismoDia = citaRepo.Consultar(null, cita.Dni, null, null ,null , cita.FechaInspeccion, null, 1);
+        
+        if(citasPropietarioMismoDia.Count >= 3) throw new ArgumentException("No pueden registrarse mas de 3 citas para el mismo propietario el mismo dia");
         
         citaRepo.Create(cita);
     }
@@ -31,10 +36,7 @@ public class CitaService(ICitaRepository citaRepo, IVehiculoRepository vehiculoR
         ValidarCita(cita);
         
         var citaExists = citaRepo.GetById(id);
-        if (citaExists == null)
-        {
-            throw new ArgumentException("No existe cita para esta id");
-        }
+        if (citaExists == null) throw new ArgumentException("No existe cita para esta id");
         
         citaRepo.Update(cita, id);
     }
@@ -44,10 +46,7 @@ public class CitaService(ICitaRepository citaRepo, IVehiculoRepository vehiculoR
         if (id <= 0) throw new ArgumentException("El id tiene que ser mayor que 0");
         
         var citaExists = citaRepo.GetById(id);
-        if (citaExists == null)
-        {
-            throw new ArgumentException("No existe cita para esta id");
-        }
+        if (citaExists == null) throw new ArgumentException("No existe cita para esta id");
         
         citaRepo.Delete(id, borradoLogico);
     }
