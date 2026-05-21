@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("PoryectoFinal")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4a13a44d6fa48271dc5e393212c7388bf8d5267c")]
 [assembly: System.Reflection.AssemblyProductAttribute("PoryectoFinal")]
 [assembly: System.Reflection.AssemblyTitleAttribute("PoryectoFinal")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -8,6 +8,8 @@ namespace PoryectoFinal.Repositories;
 
 public class DapperCitaRepository(IDbConnection conexion, IVehiculoRepository vehiculoRepo) : ICitaRepository
 {
+    const int tamañoPagina = 10;
+    
     public Cita? GetById(int id)
     {
         string sql = "SELECT * FROM Citas WHERE Id = @Id";
@@ -111,7 +113,8 @@ public class DapperCitaRepository(IDbConnection conexion, IVehiculoRepository ve
         {
             sql += " AND fechaInspeccion BETWEEN @FechaPrincipio AND @FechaFinal";
         }
-
+        
+        sql += " ORDER BY c.FechaInspeccion LIMIT @Tamaño OFFSET @Paginas;";
         
         int motor = 0;
 
@@ -127,7 +130,9 @@ public class DapperCitaRepository(IDbConnection conexion, IVehiculoRepository ve
             Modelo = modelo,
             Motor = motor,
             FechaPrincipio = fechaPrincipio,
-            FechaFinal = fechaFinal
+            FechaFinal = fechaFinal,
+            Tamaño = tamañoPagina,                         
+            Paginas = (pagina - 1) * tamañoPagina
         }).ToList();
 
         foreach (var item in output)

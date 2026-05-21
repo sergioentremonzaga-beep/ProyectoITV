@@ -18,8 +18,8 @@ public class DapperVehiculoRepository(IDbConnection conexion) : IVehiculoReposit
     public void Create(Vehiculo vehiculo)
     {
         string sql = """
-                     INSERT INTO Vehiculos (Matricula, Marca, Modelo, Motor, FechaMatriculacion, IsDeleted, CreatedAt, UpdatedAt)
-                     VALUES (@Matricula, @Marca, @Modelo, @Motor, @FechaMatriculacion, @IsDeleted, @CreatedAt, @UpdatedAt)
+                     INSERT INTO Vehiculos (Matricula, Marca, Modelo, Motor, FechaMatriculacion)
+                     VALUES (@Matricula, @Marca, @Modelo, @Motor, @FechaMatriculacion)
                      """;
         conexion.Execute(sql, vehiculo);
     }
@@ -35,8 +35,6 @@ public class DapperVehiculoRepository(IDbConnection conexion) : IVehiculoReposit
                      Modelo = @Modelo,
                      Motor = @Motor,
                      FechaMatriculacion = @FechaMatriculacion,
-                     IsDeleted = @IsDeleted,
-                     CreatedAt = @CreatedAt,
                      UpdatedAt = @UpdatedAt
                      WHERE Matricula = @XMatricula;
                      """;
@@ -48,7 +46,6 @@ public class DapperVehiculoRepository(IDbConnection conexion) : IVehiculoReposit
             Motor = (int)vehiculo.Motor,
             FechaMatriculacion = vehiculo.FechaMatriculacion.ToString("yyyy-MM-dd"),
             UpdatedAt = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"),
-            IsDeleted = vehiculo.IsDeleted,
             XMatricula = matricula
         });
     }
