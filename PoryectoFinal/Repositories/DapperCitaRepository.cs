@@ -6,7 +6,7 @@ using PoryectoFinal.Models;
 
 namespace PoryectoFinal.Repositories;
 
-public class DapperCitaRepository(IDbConnection conexion, IVehiculoRepository vehiculoRepo) : ICitaRepository
+public class DapperCitaRepository(IDbConnection conexion) : ICitaRepository
 {
     const int tamañoPagina = 10;
     
@@ -17,15 +17,14 @@ public class DapperCitaRepository(IDbConnection conexion, IVehiculoRepository ve
         
         if (output == null) return null;
         
-        output.Vehiculo = vehiculoRepo.GetByMatricula(output.Matricula);
         return output;
     }
 
     public void Create(Cita cita)
     {
         string sql = """
-                     INSERT INTO Citas (Dni, Matricula, FechaInspeccion)
-                     VALUES (@Dni, @Matricula, @FechaInspeccion);
+                     INSERT INTO Citas (Dni, Matricula, FechaInspeccion,  Marca, Modelo, Motor, FechaMatriculacion)
+                     VALUES (@Dni, @Matricula, @FechaInspeccion, @Marca, @Modelo, @Motor, @FechaMatriculacion);
                      """;
         conexion.Execute(sql, cita);
     }
@@ -37,6 +36,10 @@ public class DapperCitaRepository(IDbConnection conexion, IVehiculoRepository ve
                      Dni = @Dni,
                      Matricula = @Matricula,
                      FechaInspeccion = @FechaInspeccion,
+                     Marca = @Marca,
+                     Modelo = @Modelo,
+                     Motor = @Motor,
+                     FechaMatriculacion = @FechaMatriculacion,
                      IsDeleted = @IsDeleted,
                      UpdatedAt = @UpdatedAt
                      WHERE Id = @Id;
@@ -46,6 +49,10 @@ public class DapperCitaRepository(IDbConnection conexion, IVehiculoRepository ve
             Dni = cita.Dni,
             Matricula = cita.Matricula,
             FechaInspeccion = cita.FechaInspeccion,
+            Marca = cita.Marca,
+            Modelo =  cita.Modelo,
+            Motor = (int)cita.Motor,
+            FechaMatriculacion = cita.FechaMatriculacion.ToString("o"),
             IsDeleted = cita.IsDeleted,
             UpdatedAt = DateTime.Now.ToString("o"),
             Id = id
@@ -75,48 +82,19 @@ public class DapperCitaRepository(IDbConnection conexion, IVehiculoRepository ve
         DateTime? fechaPrincipio, DateTime? fechaFinal, int pagina)
     {
         string sql = """
-                     SELECT * FROM Citas c
-                     INNER JOIN Vehiculos v ON c.Matricula = v.Matricula
+                     SELECT * FROM Citas
                      WHERE c.IsDeleted = 0
+                     AND (Matricula = @Matricula OR @Matricula IS NULL)
+                     AND (Dni = @Dni OR @Dni IS NULL)
+                     AND (Marca = @Marca OR @Marca IS NULL)
+                     AND (Modelo = @Modelo OR @Modelo IS NULL)
+                     AND (Motor = @Motor OR @Motor IS NULL)
+                     AND (FechaInspeccion >= @FechaPrincipio OR @FechaPrincipio IS NULL)
+                     AND (FechaInspeccion <= @FechaFinal OR @FechaFinal IS NULL)
+                     ORDER BY c.FechaInspeccion LIMIT @Tamaño OFFSET @Paginas;
                      """;
         
-        if(!string.IsNullOrWhiteSpace(matricula))
-        {
-            sql += " AND c.Matricula = @Matricula";
-        }
-        
-        if(!string.IsNullOrWhiteSpace(dni))
-        {
-            sql += " AND c.Dni = @Dni";
-        }
-        
-        if(!string.IsNullOrWhiteSpace(marca))
-        {
-            sql += " AND v.Marca = @Marca";
-        }
-        
-        if(!string.IsNullOrWhiteSpace(modelo))
-        {
-            sql += " AND v.Modelo = @Modelo";
-        }
-
-        if (tipoMotor.HasValue)
-        {
-            sql += " AND v.Motor = @Motor";
-        }
-
-        if (fechaPrincipio.HasValue && !fechaFinal.HasValue)
-        {
-            sql += " AND fechaInspeccion >= @FechaPrincipio";
-        } 
-        else if (fechaPrincipio.HasValue && fechaFinal.HasValue)
-        {
-            sql += " AND fechaInspeccion BETWEEN @FechaPrincipio AND @FechaFinal";
-        }
-        
-        sql += " ORDER BY c.FechaInspeccion LIMIT @Tamaño OFFSET @Paginas;";
-        
-        int motor = 0;
+        int? motor = 0;
 
         if (tipoMotor.HasValue)
         {
@@ -124,21 +102,16 @@ public class DapperCitaRepository(IDbConnection conexion, IVehiculoRepository ve
         }
         
         var output = conexion.Query<Cita>(sql, new {
-            Matricula = matricula,
-            Dni = dni,
-            Marca = marca,
-            Modelo = modelo,
-            Motor = motor,
-            FechaPrincipio = fechaPrincipio,
-            FechaFinal = fechaFinal,
+            Matricula = string.IsNullOrWhiteSpace(matricula) ? null : matricula,
+            Dni = string.IsNullOrWhiteSpace(dni) ? null : dni,
+            Marca = string.IsNullOrWhiteSpace(marca) ? null : marca,
+            Modelo = string.IsNullOrWhiteSpace(modelo) ? null : modelo,
+            Motor = tipoMotor.HasValue ? motor : null,
+            FechaPrincipio = fechaPrincipio.HasValue ? fechaPrincipio?.ToString("o") : null,
+            FechaFinal = fechaFinal.HasValue ? fechaFinal?.ToString("o") : null,
             Tamaño = tamañoPagina,                         
             Paginas = (pagina - 1) * tamañoPagina
         }).ToList();
-
-        foreach (var item in output)
-        {
-            item.Vehiculo = vehiculoRepo.GetByMatricula(item.Matricula);
-        }
         
         return output;
     }

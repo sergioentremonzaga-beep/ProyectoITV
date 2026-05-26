@@ -2,7 +2,7 @@
 
 namespace PoryectoFinal.Services;
 
-public static class Validador
+public static class ValidadorCita
 {
     public static bool ValidarDni(string? dni)
     {

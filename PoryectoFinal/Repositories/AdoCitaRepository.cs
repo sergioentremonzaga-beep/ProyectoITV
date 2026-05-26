@@ -4,7 +4,7 @@ using PoryectoFinal.Models;
 
 namespace PoryectoFinal.Repositories;
 
-public class AdoCitaRepository(SqliteConnection conexion, IVehiculoRepository vehiculoRepo) : ICitaRepository
+public class AdoCitaRepository(SqliteConnection conexion) : ICitaRepository
 {
     const int tamañoPagina = 10;
     
@@ -22,12 +22,16 @@ public class AdoCitaRepository(SqliteConnection conexion, IVehiculoRepository ve
     {
         using var command = conexion.CreateCommand();
         command.CommandText = """
-                              INSERT INTO Citas (Dni, Matricula, FechaInspeccion)
-                              VALUES (@Dni, @Matricula, @FechaInspeccion);
+                              INSERT INTO Citas (Dni, Matricula, FechaInspeccion,  Marca, Modelo, Motor, FechaMatriculacion)
+                              VALUES (@Dni, @Matricula, @FechaInspeccion, @Marca, @Modelo, @Motor, @FechaMatriculacion);
                               """;
         command.Parameters.AddWithValue("@Dni", cita.Dni);
         command.Parameters.AddWithValue("@Matricula", cita.Matricula);
         command.Parameters.AddWithValue("@FechaInspeccion", cita.FechaInspeccion.ToString("o"));
+        command.Parameters.AddWithValue("@Marca", cita.Marca);
+        command.Parameters.AddWithValue("@Modelo", cita.Modelo);
+        command.Parameters.AddWithValue("@Motor", (int)cita.Motor);
+        command.Parameters.AddWithValue("@FechaMatriculacion", cita.FechaMatriculacion.ToString("yyyy-MM-dd"));
         
         command.ExecuteNonQuery();
     }
@@ -40,6 +44,11 @@ public class AdoCitaRepository(SqliteConnection conexion, IVehiculoRepository ve
                               Dni = @Dni,
                               Matricula = @Matricula,
                               FechaInspeccion = @FechaInspeccion,
+                              Marca = @Marca,
+                              Modelo = @Modelo,
+                              Motor = @Motor,
+                              FechaMatriculacion = @FechaMatriculacion,
+                              IsDeleted = @IsDeleted,
                               UpdatedAt = @UpdatedAt
                               WHERE Id = @Id;
                               """;
@@ -48,6 +57,10 @@ public class AdoCitaRepository(SqliteConnection conexion, IVehiculoRepository ve
         command.Parameters.AddWithValue("@Dni", cita.Dni);
         command.Parameters.AddWithValue("@Matricula", cita.Matricula);
         command.Parameters.AddWithValue("@FechaInspeccion", cita.FechaInspeccion.ToString("o"));
+        command.Parameters.AddWithValue("@Marca", cita.Marca);
+        command.Parameters.AddWithValue("@Modelo", cita.Modelo);
+        command.Parameters.AddWithValue("@Motor", (int)cita.Motor);
+        command.Parameters.AddWithValue("@FechaMatriculacion", cita.FechaMatriculacion.ToString("o"));
         command.Parameters.AddWithValue("@UpdatedAt", DateTime.Now.ToString("o"));
         
         command.ExecuteNonQuery();
@@ -81,56 +94,27 @@ public class AdoCitaRepository(SqliteConnection conexion, IVehiculoRepository ve
         DateTime? fechaPrincipio, DateTime? fechaFinal, int pagina)
     {
         string sql = """
-                     SELECT * FROM Citas c
-                     INNER JOIN Vehiculos v ON c.Matricula = v.Matricula
-                     WHERE c.IsDeleted = 0
+                     SELECT * FROM Citas
+                     WHERE IsDeleted = 0
+                     AND (Matricula = @Matricula OR @Matricula IS NULL)
+                     AND (Dni = @Dni OR @Dni IS NULL)
+                     AND (Marca = @Marca OR @Marca IS NULL)
+                     AND (Modelo = @Modelo OR @Modelo IS NULL)
+                     AND (Motor = @Motor OR @Motor IS NULL)
+                     AND (FechaInspeccion >= @FechaPrincipio OR @FechaPrincipio IS NULL)
+                     AND (FechaInspeccion <= @FechaFinal OR @FechaFinal IS NULL)
+                     ORDER BY FechaInspeccion LIMIT @Tamaño OFFSET @Paginas;
                      """;
         
         using var command = conexion.CreateCommand();
-
-        if(!string.IsNullOrWhiteSpace(matricula))
-        {
-            sql += " AND c.Matricula = @Matricula";
-            command.Parameters.AddWithValue("@Matricula", matricula);
-        }
         
-        if(!string.IsNullOrWhiteSpace(dni))
-        {
-            sql += " AND c.Dni = @Dni";
-            command.Parameters.AddWithValue("@Dni", dni);
-        }
-        
-        if(!string.IsNullOrWhiteSpace(marca))
-        {
-            sql += " AND v.Marca = @Marca";
-            command.Parameters.AddWithValue("@Marca", marca);
-        }
-        
-        if(!string.IsNullOrWhiteSpace(modelo))
-        {
-            sql += " AND v.Modelo = @Modelo";
-            command.Parameters.AddWithValue("@Modelo", modelo);
-        }
-
-        if (tipoMotor.HasValue)
-        {
-            sql += " AND v.Motor = @Motor";
-            command.Parameters.AddWithValue("@Motor", (int)tipoMotor.Value);
-        }
-
-        if (fechaPrincipio.HasValue && !fechaFinal.HasValue)
-        {
-            sql += " AND fechaInspeccion >= @FechaPrincipio";
-            command.Parameters.AddWithValue("@FechaPrincipio", fechaPrincipio.Value.ToString("o"));
-        } 
-        else if (fechaPrincipio.HasValue && fechaFinal.HasValue)
-        {
-            sql += " AND fechaInspeccion BETWEEN @FechaPrincipio AND @FechaFinal";
-            command.Parameters.AddWithValue("@FechaPrincipio", fechaPrincipio.Value.ToString("o"));
-            command.Parameters.AddWithValue("@FechaFinal", fechaFinal.Value.ToString("o"));
-        }
-        
-        sql += " ORDER BY c.FechaInspeccion LIMIT @Tamaño OFFSET @Paginas;";
+        command.Parameters.AddWithValue("@Matricula", string.IsNullOrWhiteSpace(matricula) ? DBNull.Value : matricula);
+        command.Parameters.AddWithValue("@Dni", string.IsNullOrWhiteSpace(dni) ? DBNull.Value : dni);
+        command.Parameters.AddWithValue("@Marca", string.IsNullOrWhiteSpace(marca) ? DBNull.Value : marca);
+        command.Parameters.AddWithValue("@Modelo", string.IsNullOrWhiteSpace(modelo) ? DBNull.Value : modelo);
+        command.Parameters.AddWithValue("@Motor", tipoMotor.HasValue ? (int)tipoMotor.Value : DBNull.Value);
+        command.Parameters.AddWithValue("@FechaPrincipio", fechaPrincipio.HasValue ? fechaPrincipio.Value.ToString("o") : DBNull.Value);
+        command.Parameters.AddWithValue("@FechaFinal", fechaFinal.HasValue ? fechaFinal.Value.ToString("o") : DBNull.Value);
         command.Parameters.AddWithValue("@Tamaño", tamañoPagina);
         command.Parameters.AddWithValue("@Paginas", (pagina - 1) * tamañoPagina);
         
@@ -142,26 +126,27 @@ public class AdoCitaRepository(SqliteConnection conexion, IVehiculoRepository ve
         {
             output.Add(MapCita(reader));
         }
-
-        foreach (var item in output)
-        {
-            item.Vehiculo = vehiculoRepo.GetByMatricula(item.Matricula)!;
-        }
         
         return output;
     }
 
     private static Cita MapCita(SqliteDataReader reader)
     {
+        var motor = (TipoMotor)reader.GetInt32(6);
+        
         return new Cita
         {
             Id = reader.GetInt32(0),
             Dni = reader.GetString(1),
             Matricula = reader.GetString(2),
             FechaInspeccion = DateTime.Parse(reader.GetString(3)),
-            IsDeleted = reader.GetInt32(4) == 1,
-            CreatedAt = DateTime.Parse(reader.GetString(5)),
-            UpdatedAt = reader.IsDBNull(6) ? null : DateTime.Parse(reader.GetString(6))
+            Marca = reader.GetString(4),
+            Modelo = reader.GetString(5),
+            Motor = motor,
+            FechaMatriculacion = DateTime.Parse(reader.GetString(7)),
+            IsDeleted = reader.GetInt32(8) == 1,
+            CreatedAt = DateTime.Parse(reader.GetString(9)),
+            UpdatedAt = reader.IsDBNull(10) ? null : DateTime.Parse(reader.GetString(10))
         };
     }
 }

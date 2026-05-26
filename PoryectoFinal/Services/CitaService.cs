@@ -4,7 +4,7 @@ using PoryectoFinal.Models;
 
 namespace PoryectoFinal.Services;
 
-public class CitaService(ICitaRepository citaRepo, IVehiculoRepository vehiculoRepo) : ICitaService
+public class CitaService(ICitaRepository citaRepo) : ICitaService
 {
     public Cita? GetById(int id)
     {
@@ -15,9 +15,6 @@ public class CitaService(ICitaRepository citaRepo, IVehiculoRepository vehiculoR
     public void Create(Cita cita)
     {
         ValidarCita(cita);
-        
-        var vehiculo = vehiculoRepo.GetByMatricula(cita.Matricula);
-        if (vehiculo == null) throw new ArgumentException("No existe vehiculo para esta matricula");
         
         var citasVehiculoMismoDia = citaRepo.Consultar(cita.Matricula, null, null, null ,null , cita.FechaInspeccion, null, 1);
 
@@ -64,10 +61,12 @@ public class CitaService(ICitaRepository citaRepo, IVehiculoRepository vehiculoR
         
         if(cita.IsDeleted) throw new ArgumentException("La cita no puede estar eliminada");
         
-        if (!Validador.ValidarDni(cita.Dni)) throw new ArgumentException("El DNI del propietario es obligatorio y tiene que ser valido");
+        if (!ValidadorCita.ValidarDni(cita.Dni)) throw new ArgumentException("El DNI del propietario es obligatorio y tiene que ser valido");
 
-        if (!Validador.ValidarMatricula(cita.Matricula)) throw new ArgumentException("La matricula del vehiculo es obligatoria y tiene que ser valida");
+        if (!ValidadorCita.ValidarMatricula(cita.Matricula)) throw new ArgumentException("La matricula del vehiculo es obligatoria y tiene que ser valida");
 
-        if (!Validador.ValidarFechaInspeccion(cita.FechaInspeccion)) throw new ArgumentException("La fecha de inspeccion es obligatoria y tiene que estar comprendida entre hoy y dentro de 30 dias");
+        if (!ValidadorCita.ValidarFechaInspeccion(cita.FechaInspeccion)) throw new ArgumentException("La fecha de inspeccion es obligatoria y tiene que estar comprendida entre hoy y dentro de 30 dias");
+        
+        if (!ValidadorCita.ValidarFechaMatriculacion(cita.FechaMatriculacion)) throw new ArgumentException("La fecha de matriculacion es obligatoria y tiene que estar comprendida entre el presente y el pasado");
     }
 }

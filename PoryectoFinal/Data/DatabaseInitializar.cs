@@ -11,8 +11,11 @@ public static class DatabaseInitializar
         conexion.Open();
 
         string sql = """
-                     CREATE TABLE IF NOT EXISTS Vehiculos(
-                         Matricula TEXT PRIMARY KEY,
+                     CREATE TABLE IF NOT EXISTS Citas(
+                         Id INTEGER PRIMARY KEY AUTOINCREMENT,
+                         Dni TEXT NOT NULL,
+                         Matricula TEXT NOT NULL,
+                         FechaInspeccion TEXT NOT NULL,
                          Marca TEXT NOT NULL,
                          Modelo TEXT NOT NULL,
                          Motor INTEGER  NOT NULL,
@@ -20,17 +23,6 @@ public static class DatabaseInitializar
                          IsDeleted INTEGER NOT NULL DEFAULT 0,
                          CreatedAt TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
                          UpdatedAt TEXT
-                     );
-
-                     CREATE TABLE IF NOT EXISTS Citas(
-                         Id INTEGER PRIMARY KEY AUTOINCREMENT,
-                         Dni TEXT NOT NULL,
-                         Matricula TEXT NOT NULL,
-                         FechaInspeccion TEXT NOT NULL,
-                         IsDeleted INTEGER NOT NULL DEFAULT 0,
-                         CreatedAt TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
-                         UpdatedAt TEXT,
-                         FOREIGN KEY(Matricula) REFERENCES Vehiculos (Matricula)
                      );
                      """;
         conexion.Execute(sql);

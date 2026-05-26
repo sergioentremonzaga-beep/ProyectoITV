@@ -16,27 +16,23 @@ public static class DependenciesProvider
         switch (provider)
         {
             case "EFCore":
-            services.AddDbContext<AppDbContext>(o => o.UseSqlite(connectionString));
-            services.AddScoped<ICitaRepository, EfCoreCitaRepository>();
-            services.AddScoped<IVehiculoRepository, EfCoreVehiculoRepository>();
-            break;
+                services.AddDbContext<AppDbContext>(o => o.UseSqlite(connectionString));
+                services.AddScoped<ICitaRepository, EfCoreCitaRepository>();
+                break;
             case "Dapper":
                 services.AddScoped<IDbConnection>(c => new SqliteConnection(connectionString));
                 services.AddScoped<ICitaRepository, DapperCitaRepository>();
-                services.AddScoped<IVehiculoRepository, DapperVehiculoRepository>();
                 break;
             case "ADO":
                 services.AddScoped<IDbConnection>(c => new SqliteConnection(connectionString));
                 services.AddScoped<ICitaRepository, AdoCitaRepository>();
-                services.AddScoped<IVehiculoRepository, AdoVehiculoRepository>();
                 break;
             default:
                 services.AddScoped<IDbConnection>(c => new SqliteConnection(connectionString));
                 services.AddScoped<ICitaRepository, DapperCitaRepository>();
-                services.AddScoped<IVehiculoRepository, DapperVehiculoRepository>();
                 break;
         }
-        
+
         services.AddScoped<CitaService>();
         return services;
     }

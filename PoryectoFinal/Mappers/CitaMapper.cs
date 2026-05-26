@@ -4,16 +4,22 @@ using PoryectoFinal.Models;
 
 namespace PoryectoFinal.Mappers;
 
-public class CitaMapper(IVehiculoService vehiculoService) : IMapper<Cita, CitaDTO>
+public class CitaMapper : IMapper<Cita, CitaDTO>
 {
     public CitaDTO ToDto(Cita cita)
     {
-        return new CitaDTO(cita.Id, cita.Dni, cita.Matricula, cita.FechaInspeccion.ToShortDateString());
+        return new CitaDTO(cita.Id, cita.Dni, cita.Matricula, cita.FechaInspeccion.ToShortDateString(), cita.Marca,
+            cita.Modelo, cita.Motor.ToString(), cita.FechaMatriculacion.ToShortDateString());
     }
 
-    public Cita ToModel(CitaDTO citaDTO)
+    public Cita ToModel(CitaDTO dto)
     {
-        var vehiculo = vehiculoService.GetByMatricula(citaDTO.Matricula);
-        return new Cita { Id = citaDTO.Id, Dni = citaDTO.Dni, Matricula = citaDTO.Matricula, FechaInspeccion = DateTime.Parse(citaDTO.FechaInspeccion), Vehiculo = vehiculo };
+        return new Cita
+        {
+            Id = dto.Id, Dni = dto.Dni, Matricula = dto.Matricula,
+            FechaInspeccion = DateTime.Parse(dto.FechaInspeccion), Marca = dto.Marca,
+            Modelo = dto.Modelo, Motor = (TipoMotor)Enum.Parse(typeof(TipoMotor), dto.Motor),
+            FechaMatriculacion = DateTime.Parse(dto.FechaMatriculacion)
+        };
     }
 }
