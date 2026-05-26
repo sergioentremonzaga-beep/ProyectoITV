@@ -1,15 +1,13 @@
-﻿using Dapper;
+﻿using System.Data;
+using Dapper;
 using Microsoft.Data.Sqlite;
 
 namespace PoryectoFinal.Data;
 
-public static class DatabaseInitializar
+public static class DatabaseInitializer
 {
-    public static void InicializarBd(string conexionString)
+    public static void InicializarBd(IDbConnection conexion)
     {
-        using var conexion = new SqliteConnection(conexionString);
-        conexion.Open();
-
         string sql = """
                      CREATE TABLE IF NOT EXISTS Citas(
                          Id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -26,6 +24,5 @@ public static class DatabaseInitializar
                      );
                      """;
         conexion.Execute(sql);
-        conexion.Close();
     }
 }

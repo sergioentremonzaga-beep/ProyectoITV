@@ -30,10 +30,16 @@ public class CitaService(ICitaRepository citaRepo) : ICitaService
     public void Update(Cita cita, int id)
     {
         if (id <= 0) throw new ArgumentException("El id tiene que ser mayor que 0");
-        ValidarCita(cita);
         
         var citaExists = citaRepo.GetById(id);
         if (citaExists == null) throw new ArgumentException("No existe cita para esta id");
+        
+        cita.Dni ??= citaExists.Dni;
+        cita.Matricula ??= citaExists.Matricula;
+        cita.Marca ??= citaExists.Marca;
+        cita.Modelo ??= citaExists.Modelo;
+        
+        ValidarCita(cita);
         
         citaRepo.Update(cita, id);
     }

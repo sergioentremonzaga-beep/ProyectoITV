@@ -43,6 +43,6 @@ public static class ValidadorCita
     {
         if (!fecha.HasValue) return false;
         
-        return (fecha < DateTime.Now.AddDays(+1));
+        return (fecha <= DateTime.Now);
     }
 }
