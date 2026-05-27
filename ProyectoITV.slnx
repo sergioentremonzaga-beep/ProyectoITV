@@ -1,4 +1,5 @@
 <Solution>
+  <Project Path="ProyectoITV.Front/ProyectoITV.Front.csproj" />
   <Project Path="ProyectoITV.Tests/ProyectoITV.Tests.csproj" />
   <Project Path="ProyectoITV/ProyectoITV.csproj" />
 </Solution>

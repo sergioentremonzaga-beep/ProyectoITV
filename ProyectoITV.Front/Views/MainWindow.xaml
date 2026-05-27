@@ -1,0 +1,136 @@
+﻿<Window x:Class="ProyectoITV.Front.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:ProyectoITV.Front"
+        Height="600" Width="1300">
+    
+    <DockPanel>
+        
+        <Menu DockPanel.Dock="Top" Padding="4">
+            <MenuItem Header="_Options">
+                <MenuItem Header="Salir" Command="{Binding SalirCommand}"/>
+            </MenuItem>
+            <MenuItem Header="_Información">
+                <MenuItem Header="Acerca de" Command="{Binding AcercaDeCommand}"/>
+            </MenuItem>
+        </Menu>
+        
+        <Grid Background="#1E1E2E">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="400"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Border Grid.Column="0" Background="#2A2A3C" Margin="15" Padding="15" CornerRadius="20">
+                <StackPanel>
+                    <TextBlock Text="Crear Cita" FontSize="21" Foreground="White" FontWeight="Bold" Margin="0,0,0,12"/>
+                    
+                    <TextBlock Text="DNI:" FontWeight="SemiBold" Foreground="White" Margin="0,0,0,2"/>
+                    <TextBox Text="{Binding Dni}" Padding="6" Margin="0,0,0,10"/>
+                    
+                    <TextBlock Text="Matrícula:" FontWeight="SemiBold" Foreground="White" Margin="0,0,0,2"/>
+                    <TextBox Text="{Binding Matricula}" Padding="6" Margin="0,0,0,10"/>
+                    
+                    <TextBlock Text="Marca:" FontWeight="SemiBold" Foreground="White" Margin="0,0,0,2"/>
+                    <TextBox Text="{Binding Marca}" Padding="6" Margin="0,0,0,10"/>
+                    
+                    <TextBlock Text="Modelo:" FontWeight="SemiBold" Foreground="White" Margin="0,0,0,2"/>
+                    <TextBox Text="{Binding Modelo}" Padding="6" Margin="0,0,0,10"/>
+                    
+                    <TextBlock Text="Tipo de Motor:" FontWeight="SemiBold" Foreground="White" Margin="0,0,0,2"/>
+                    <ComboBox ItemsSource="{Binding ListaMotores}" SelectedItem="{Binding Motor}" Padding="6" Margin="0,0,0,10"/>
+                    
+                    <TextBlock Text="Fecha de Inspección:" FontWeight="SemiBold" Foreground="White" Margin="0,0,0,2"/>
+                    <DatePicker Background="White" SelectedDate="{Binding FechaInspeccion}" Margin="0,0,0,10"/>
+                    
+                    <TextBlock Text="Fecha de Matriculación:" FontWeight="SemiBold" Foreground="White" Margin="0,0,0,2"/>
+                    <DatePicker Background="White" SelectedDate="{Binding FechaMatriculacion}" Margin="0,0,0,25"/>
+                    
+                    <Button Content="Registrar Cita" Command="{Binding CreateCommand}" 
+                            Padding="12" Background="#7B61FF" Foreground="White" FontWeight="Bold" Cursor="Hand"/>
+                </StackPanel>
+            </Border>
+
+            <Grid Grid.Column="1" Margin="15">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="160"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <Border Grid.Row="0" Background="#2A2A3C" Padding="15" CornerRadius="20" Margin="0,0,0,10">
+                    <StackPanel>
+                        <TextBlock Text="Buscador y Filtros" Foreground="White" FontWeight="Bold" Margin="0,0,0,10"/>
+                        <WrapPanel Orientation="Horizontal" Margin="0,0,0,10">
+                            <StackPanel Margin="0,0,10,10">
+                                <TextBlock Text="Matrícula" Foreground="White" FontWeight="SemiBold"  FontSize="10" Margin="0,0,0,2"/>
+                                <TextBox Width="110" Text="{Binding InputMatricula}"/>
+                            </StackPanel>
+
+                            <StackPanel Margin="0,0,10,10">
+                                <TextBlock Text="DNI" Foreground="White" FontWeight="SemiBold"  FontSize="10" Margin="0,0,0,2"/>
+                                <TextBox Width="110" Text="{Binding InputDni}"/>
+                            </StackPanel>
+
+                            <StackPanel Margin="0,0,10,10">
+                                <TextBlock Text="Marca" Foreground="White" FontWeight="SemiBold"  FontSize="10" Margin="0,0,0,2"/>
+                                <TextBox Width="110" Text="{Binding InputMarca}"/>
+                            </StackPanel>
+
+                            <StackPanel Margin="0,0,10,10">
+                                <TextBlock Text="Modelo" Foreground="White" FontWeight="SemiBold"  FontSize="10" Margin="0,0,0,2"/>
+                                <TextBox Width="110" Text="{Binding InputModelo}"/>
+                            </StackPanel>
+                            
+                            <StackPanel Margin="0,0,10,10">
+                                <TextBlock Text="Motor" Foreground="White" FontWeight="SemiBold"  FontSize="10" Margin="0,0,0,2"/>
+                                <ComboBox Width="110" Height="18" ItemsSource="{Binding ListaMotores}" SelectedItem="{Binding InputMotor}"/>
+                            </StackPanel>
+                            
+                            <StackPanel Margin="0,0,10,10">
+                                <TextBlock Text="Fecha Principio" Foreground="White" FontWeight="SemiBold"  FontSize="10" Margin="0,0,0,2"/>
+                                <DatePicker Background="White" Width="110" Height="18" SelectedDate="{Binding InputFechaPrincipio}"/>
+                            </StackPanel>
+                            
+                            <StackPanel Margin="0,0,10,10">
+                                <TextBlock Text="Fecha Final" Foreground="White" FontWeight="SemiBold"  FontSize="10" Margin="0,0,0,2"/>
+                                <DatePicker Background="White" Width="110" Height="18" SelectedDate="{Binding InputFechaFinal}"/>
+                            </StackPanel>
+                            
+                        </WrapPanel>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                            <Button Content="Buscar" Command="{Binding ConsultarCommand}" Width= "80" Height="40" Background="#7B61FF" Foreground="White" FontWeight="Bold"/>
+                            <Button Content="Editar Seleccion" Command="{Binding UpdateCommand}" CommandParameter="{Binding ElementName=TablaCitas, Path=SelectedItem}" 
+                                    Margin="18,0,0,0" Width="110" Background="#4A90E2" Foreground="White" FontWeight="Bold"/>
+                            <Button Content="Exportar" Command="{Binding ExportarCommand}" CommandParameter="{Binding ElementName=TablaCitas, Path=SelectedItem}" 
+                                    Margin="18,0,0,0" Width="80" Background="#28A745" Foreground="White" FontWeight="Bold" Cursor="Hand"/>
+                            <Button Content="Eliminar Seleccion" Command="{Binding DeleteCommand}" CommandParameter="{Binding ElementName=TablaCitas, Path=SelectedItem}" 
+                                    Margin="18,0,0,0" Width="120" Background="#B22222" Foreground="White" FontWeight="Bold"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+
+                <DataGrid x:Name="TablaCitas" Grid.Row="1" ItemsSource="{Binding Citas}"
+                          AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single"  Background="#2A2A3C">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="40"/>
+                        <DataGridTextColumn Header="Matrícula" Binding="{Binding Matricula}" Width="110"/>
+                        <DataGridTextColumn Header="DNI" Binding="{Binding Dni}" Width="120"/>
+                        <DataGridTextColumn Header="Marca" Binding="{Binding Marca}" Width="120"/>
+                        <DataGridTextColumn Header="Modelo" Binding="{Binding Modelo}" Width="120"/>
+                        <DataGridTextColumn Header="Motor" Binding="{Binding Motor}" Width="120"/>
+                        <DataGridTextColumn Header="Fecha Inspección" Binding="{Binding FechaInspeccion, StringFormat=\{0:dd/MM/yyyy\}}" Width="120"/>
+                        <DataGridTextColumn Header="Fecha Matriculación" Binding="{Binding FechaMatriculacion, StringFormat=\{0:dd/MM/yyyy\}}" Width="120"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+
+                <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,14,0,0">
+                    <Button Content="Atrás" Command="{Binding PaginaAnteriorCommand}" Width="80" Height="43" Background="#7B61FF" Foreground="White" FontWeight="Bold"/>
+                    <TextBlock Text="Página:" VerticalAlignment="Center" Margin="20,0,5,0" FontWeight="Bold" FontSize="16" Foreground="White"/>
+                    <TextBlock Text="{Binding PaginaActual}" VerticalAlignment="Center" Margin="0,0,20,0" FontWeight="Bold" FontSize="16" Foreground="White"/>
+                    <Button Content="Siguiente" Command="{Binding PaginaSiguienteCommand}" Width="80" Height="43" Background="#7B61FF" Foreground="White" FontWeight="Bold"/>
+                </StackPanel>
+            </Grid>
+        </Grid>
+    </DockPanel>    
+</Window>

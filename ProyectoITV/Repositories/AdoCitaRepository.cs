@@ -4,11 +4,17 @@ using ProyectoITV.Models;
 
 namespace ProyectoITV.Repositories;
 
-
+/// <summary>
+/// Esta clase gestiona el acceso a datos utilizando ADO
+/// </summary>
+/// <param name="conexion">La conexión a la base de datos</param>
 public class AdoCitaRepository(SqliteConnection conexion) : ICitaRepository
 {
     const int tamañoPagina = 10;
     
+    /// <summary>
+    /// Devuelve una cita específica por su ID
+    /// </summary>
     public Cita? GetById(int id)
     {
         using var command = conexion.CreateCommand();
@@ -18,7 +24,10 @@ public class AdoCitaRepository(SqliteConnection conexion) : ICitaRepository
         using var reader = command.ExecuteReader();
         return reader.Read() ? MapCita(reader) :  null;
     }
-
+    
+    /// <summary>
+    /// Inserta una nueva cita en la base de datos
+    /// </summary>
     public void Create(Cita cita)
     {
         using var command = conexion.CreateCommand();
@@ -36,7 +45,10 @@ public class AdoCitaRepository(SqliteConnection conexion) : ICitaRepository
         
         command.ExecuteNonQuery();
     }
-
+    
+    /// <summary>
+    /// Actualiza los datos de una cita
+    /// </summary>
     public void Update(Cita cita, int id)
     {
         using var command = conexion.CreateCommand();
@@ -67,6 +79,10 @@ public class AdoCitaRepository(SqliteConnection conexion) : ICitaRepository
         command.ExecuteNonQuery();
     }
 
+    /// <summary>
+    /// Elimina una cita de forma física o lógica
+    /// </summary>
+    /// <param name="borradoLogico">Si es true, cambia IsDeleted a 1 (borrado), si es false, elimina la cita de la base de datos</param>
     public void Delete(int id, bool borradoLogico)
     {
         using var command = conexion.CreateCommand();
@@ -90,10 +106,14 @@ public class AdoCitaRepository(SqliteConnection conexion) : ICitaRepository
         command.Parameters.AddWithValue("@Id", id);
         command.ExecuteNonQuery();
     }
-
+    
+    /// <summary>
+    /// Realiza una consulta filtrada y con paginación de los resultados
+    /// </summary>
     public List<Cita> Consultar(string? matricula, string? dni, string? marca, string? modelo, TipoMotor? tipoMotor,
         DateTime? fechaPrincipio, DateTime? fechaFinal, int pagina)
     {
+        // Si el parámetro no es nulo lo toma e ignora el OR, en caso de que lo sea toma el nulo
         string sql = """
                      SELECT * FROM Citas
                      WHERE IsDeleted = 0
@@ -117,7 +137,7 @@ public class AdoCitaRepository(SqliteConnection conexion) : ICitaRepository
         command.Parameters.AddWithValue("@FechaPrincipio", fechaPrincipio.HasValue ? fechaPrincipio.Value.ToString("o") : DBNull.Value);
         command.Parameters.AddWithValue("@FechaFinal", fechaFinal.HasValue ? fechaFinal.Value.ToString("o") : DBNull.Value);
         command.Parameters.AddWithValue("@Tamaño", tamañoPagina);
-        command.Parameters.AddWithValue("@Paginas", (pagina - 1) * tamañoPagina);
+        command.Parameters.AddWithValue("@Paginas", (pagina - 1) * tamañoPagina); // Toma 10 registros por pagina y salta todos los anteriores registros (pagina-1 * 10 = todos los registros a saltar == todas las anteriores páginas)
         
         command.CommandText = sql;
         var output = new  List<Cita>();
@@ -131,6 +151,9 @@ public class AdoCitaRepository(SqliteConnection conexion) : ICitaRepository
         return output;
     }
 
+    /// <summary>
+    /// Método auxiliar para mapear un objeto de la base de datos a una cita
+    /// </summary>
     private static Cita MapCita(SqliteDataReader reader)
     {
         var motor = (TipoMotor)reader.GetInt32(6);

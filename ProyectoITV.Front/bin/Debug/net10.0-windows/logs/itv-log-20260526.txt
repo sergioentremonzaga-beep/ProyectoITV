@@ -1,0 +1,159 @@
+2026-05-26 23:13:14.817 +02:00 [FTL] Error al iniciar la aplicación
+System.Windows.Markup.XamlParseException: 'No se encontró ningún constructor coincidente en el tipo 'ProyectoITV.Front.MainViewModel'. Puede usar las directivas Arguments o FactoryMethod para construir este tipo.' (número de línea: '8'; posición de línea: '10').
+ ---> System.MissingMethodException: No se encontró ningún constructor predeterminado para el tipo 'ProyectoITV.Front.MainViewModel'. Puede usar las directivas Arguments o FactoryMethod para construir este tipo.
+   at System.Xaml.Schema.XamlTypeInvoker.DefaultCtorXamlActivator.EnsureConstructorDelegate(XamlTypeInvoker type)
+   at System.Xaml.Schema.XamlTypeInvoker.CreateInstance(Object[] arguments)
+   at MS.Internal.Xaml.Runtime.ClrObjectRuntime.CreateInstance(XamlType xamlType, Object[] args)
+   --- End of inner exception stack trace ---
+   at System.Windows.Markup.XamlReader.RewrapException(Exception e, IXamlLineInfo lineInfo, Uri baseUri)
+   at System.Windows.Markup.WpfXamlLoader.Load(XamlReader xamlReader, IXamlObjectWriterFactory writerFactory, Boolean skipJournaledProperties, Object rootObject, XamlObjectWriterSettings settings, Uri baseUri)
+   at System.Windows.Markup.WpfXamlLoader.LoadBaml(XamlReader xamlReader, Boolean skipJournaledProperties, Object rootObject, XamlAccessLevel accessLevel, Uri baseUri)
+   at System.Windows.Markup.XamlReader.LoadBaml(Stream stream, ParserContext parserContext, Object parent, Boolean closeStream)
+   at System.Windows.Application.LoadComponent(Object component, Uri resourceLocator)
+   at ProyectoITV.Front.MainWindow.InitializeComponent() in C:\Users\skyra\RiderProjects\ProyectoITV\ProyectoITV.Front\MainWindow.xaml:line 1
+   at ProyectoITV.Front.MainWindow..ctor(MainViewModel viewModel) in C:\Users\skyra\RiderProjects\ProyectoITV\ProyectoITV.Front\MainWindow.xaml.cs:line 22
+   at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Constructor(Object obj, IntPtr* args)
+   at System.Reflection.MethodBaseInvoker.InvokeDirectByRefWithFewArgs(Object obj, Span`1 copyOfArgs, BindingFlags invokeAttr)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   at System.Reflection.RuntimeConstructorInfo.Invoke(BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitConstructor(ConstructorCallSite constructorCallSite, RuntimeResolverContext context)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSiteMain(ServiceCallSite callSite, TArgument argument)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitRootCache(ServiceCallSite callSite, RuntimeResolverContext context)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(ServiceCallSite callSite, TArgument argument)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.Resolve(ServiceCallSite callSite, ServiceProviderEngineScope scope)
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider.CreateServiceAccessor(ServiceIdentifier serviceIdentifier)
+   at System.Collections.Concurrent.ConcurrentDictionary`2.GetOrAdd(TKey key, Func`2 valueFactory)
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider.GetService(ServiceIdentifier serviceIdentifier, ServiceProviderEngineScope serviceProviderEngineScope)
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider.GetService(Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService(IServiceProvider provider, Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService[T](IServiceProvider provider)
+   at ProyectoITV.Front.App.OnStartup(StartupEventArgs e) in C:\Users\skyra\RiderProjects\ProyectoITV\ProyectoITV.Front\App.xaml.cs:line 37
+2026-05-26 23:13:42.759 +02:00 [FTL] Error al iniciar la aplicación
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at System.DefaultBinder.BindToMethod(BindingFlags bindingAttr, MethodBase[] match, Object[]& args, ParameterModifier[] modifiers, CultureInfo cultureInfo, String[] names, Object& state)
+   at MS.Internal.Xaml.Runtime.DynamicMethodRuntime.CreateInstanceWithCtor(Type type, Object[] args)
+   at MS.Internal.Xaml.Runtime.ClrObjectRuntime.CreateInstance(XamlType xamlType, Object[] args)
+   at System.Xaml.XamlObjectWriter.Logic_CreateAndAssignToParentStart(ObjectWriterContext ctx)
+   at System.Xaml.XamlObjectWriter.WriteEndObject()
+   at System.Windows.Markup.WpfXamlLoader.TransformNodes(XamlReader xamlReader, XamlObjectWriter xamlWriter, Boolean onlyLoadOneNode, Boolean skipJournaledProperties, Boolean shouldPassLineNumberInfo, IXamlLineInfo xamlLineInfo, IXamlLineInfoConsumer xamlLineInfoConsumer, XamlContextStack`1 stack, IStyleConnector styleConnector)
+   at System.Windows.Markup.WpfXamlLoader.Load(XamlReader xamlReader, IXamlObjectWriterFactory writerFactory, Boolean skipJournaledProperties, Object rootObject, XamlObjectWriterSettings settings, Uri baseUri)
+   at System.Windows.Markup.WpfXamlLoader.LoadBaml(XamlReader xamlReader, Boolean skipJournaledProperties, Object rootObject, XamlAccessLevel accessLevel, Uri baseUri)
+   at System.Windows.Markup.XamlReader.LoadBaml(Stream stream, ParserContext parserContext, Object parent, Boolean closeStream)
+   at System.Windows.Application.LoadComponent(Object component, Uri resourceLocator)
+   at ProyectoITV.Front.MainWindow.InitializeComponent() in C:\Users\skyra\RiderProjects\ProyectoITV\ProyectoITV.Front\MainWindow.xaml:line 1
+   at ProyectoITV.Front.MainWindow..ctor(MainViewModel viewModel) in C:\Users\skyra\RiderProjects\ProyectoITV\ProyectoITV.Front\MainWindow.xaml.cs:line 22
+   at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Constructor(Object obj, IntPtr* args)
+   at System.Reflection.MethodBaseInvoker.InvokeDirectByRefWithFewArgs(Object obj, Span`1 copyOfArgs, BindingFlags invokeAttr)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   at System.Reflection.RuntimeConstructorInfo.Invoke(BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitConstructor(ConstructorCallSite constructorCallSite, RuntimeResolverContext context)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSiteMain(ServiceCallSite callSite, TArgument argument)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitRootCache(ServiceCallSite callSite, RuntimeResolverContext context)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(ServiceCallSite callSite, TArgument argument)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.Resolve(ServiceCallSite callSite, ServiceProviderEngineScope scope)
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider.CreateServiceAccessor(ServiceIdentifier serviceIdentifier)
+   at System.Collections.Concurrent.ConcurrentDictionary`2.GetOrAdd(TKey key, Func`2 valueFactory)
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider.GetService(ServiceIdentifier serviceIdentifier, ServiceProviderEngineScope serviceProviderEngineScope)
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider.GetService(Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService(IServiceProvider provider, Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService[T](IServiceProvider provider)
+   at ProyectoITV.Front.App.OnStartup(StartupEventArgs e) in C:\Users\skyra\RiderProjects\ProyectoITV\ProyectoITV.Front\App.xaml.cs:line 37
+2026-05-26 23:13:47.694 +02:00 [FTL] Error al iniciar la aplicación
+System.NullReferenceException: Object reference not set to an instance of an object.
+   at System.DefaultBinder.BindToMethod(BindingFlags bindingAttr, MethodBase[] match, Object[]& args, ParameterModifier[] modifiers, CultureInfo cultureInfo, String[] names, Object& state)
+   at MS.Internal.Xaml.Runtime.DynamicMethodRuntime.CreateInstanceWithCtor(Type type, Object[] args)
+   at MS.Internal.Xaml.Runtime.ClrObjectRuntime.CreateInstance(XamlType xamlType, Object[] args)
+   at System.Xaml.XamlObjectWriter.Logic_CreateAndAssignToParentStart(ObjectWriterContext ctx)
+   at System.Xaml.XamlObjectWriter.WriteEndObject()
+   at System.Windows.Markup.WpfXamlLoader.TransformNodes(XamlReader xamlReader, XamlObjectWriter xamlWriter, Boolean onlyLoadOneNode, Boolean skipJournaledProperties, Boolean shouldPassLineNumberInfo, IXamlLineInfo xamlLineInfo, IXamlLineInfoConsumer xamlLineInfoConsumer, XamlContextStack`1 stack, IStyleConnector styleConnector)
+   at System.Windows.Markup.WpfXamlLoader.Load(XamlReader xamlReader, IXamlObjectWriterFactory writerFactory, Boolean skipJournaledProperties, Object rootObject, XamlObjectWriterSettings settings, Uri baseUri)
+   at System.Windows.Markup.WpfXamlLoader.LoadBaml(XamlReader xamlReader, Boolean skipJournaledProperties, Object rootObject, XamlAccessLevel accessLevel, Uri baseUri)
+   at System.Windows.Markup.XamlReader.LoadBaml(Stream stream, ParserContext parserContext, Object parent, Boolean closeStream)
+   at System.Windows.Application.LoadComponent(Object component, Uri resourceLocator)
+   at ProyectoITV.Front.MainWindow.InitializeComponent() in C:\Users\skyra\RiderProjects\ProyectoITV\ProyectoITV.Front\MainWindow.xaml:line 1
+   at ProyectoITV.Front.MainWindow..ctor(MainViewModel viewModel) in C:\Users\skyra\RiderProjects\ProyectoITV\ProyectoITV.Front\MainWindow.xaml.cs:line 22
+   at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Constructor(Object obj, IntPtr* args)
+   at System.Reflection.MethodBaseInvoker.InvokeDirectByRefWithFewArgs(Object obj, Span`1 copyOfArgs, BindingFlags invokeAttr)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   at System.Reflection.RuntimeConstructorInfo.Invoke(BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitConstructor(ConstructorCallSite constructorCallSite, RuntimeResolverContext context)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSiteMain(ServiceCallSite callSite, TArgument argument)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitRootCache(ServiceCallSite callSite, RuntimeResolverContext context)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(ServiceCallSite callSite, TArgument argument)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.Resolve(ServiceCallSite callSite, ServiceProviderEngineScope scope)
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider.CreateServiceAccessor(ServiceIdentifier serviceIdentifier)
+   at System.Collections.Concurrent.ConcurrentDictionary`2.GetOrAdd(TKey key, Func`2 valueFactory)
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider.GetService(ServiceIdentifier serviceIdentifier, ServiceProviderEngineScope serviceProviderEngineScope)
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider.GetService(Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService(IServiceProvider provider, Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService[T](IServiceProvider provider)
+   at ProyectoITV.Front.App.OnStartup(StartupEventArgs e) in C:\Users\skyra\RiderProjects\ProyectoITV\ProyectoITV.Front\App.xaml.cs:line 37
+2026-05-26 23:14:45.277 +02:00 [FTL] Error al iniciar la aplicación
+System.Windows.Markup.XamlParseException: 'No se encontró ningún constructor coincidente en el tipo 'ProyectoITV.Front.MainViewModel'. Puede usar las directivas Arguments o FactoryMethod para construir este tipo.' (número de línea: '8'; posición de línea: '10').
+ ---> System.MissingMethodException: No se encontró ningún constructor predeterminado para el tipo 'ProyectoITV.Front.MainViewModel'. Puede usar las directivas Arguments o FactoryMethod para construir este tipo.
+   at System.Xaml.Schema.XamlTypeInvoker.DefaultCtorXamlActivator.EnsureConstructorDelegate(XamlTypeInvoker type)
+   at System.Xaml.Schema.XamlTypeInvoker.CreateInstance(Object[] arguments)
+   at MS.Internal.Xaml.Runtime.ClrObjectRuntime.CreateInstance(XamlType xamlType, Object[] args)
+   --- End of inner exception stack trace ---
+   at System.Windows.Markup.XamlReader.RewrapException(Exception e, IXamlLineInfo lineInfo, Uri baseUri)
+   at System.Windows.Markup.WpfXamlLoader.Load(XamlReader xamlReader, IXamlObjectWriterFactory writerFactory, Boolean skipJournaledProperties, Object rootObject, XamlObjectWriterSettings settings, Uri baseUri)
+   at System.Windows.Markup.WpfXamlLoader.LoadBaml(XamlReader xamlReader, Boolean skipJournaledProperties, Object rootObject, XamlAccessLevel accessLevel, Uri baseUri)
+   at System.Windows.Markup.XamlReader.LoadBaml(Stream stream, ParserContext parserContext, Object parent, Boolean closeStream)
+   at System.Windows.Application.LoadComponent(Object component, Uri resourceLocator)
+   at ProyectoITV.Front.MainWindow.InitializeComponent() in C:\Users\skyra\RiderProjects\ProyectoITV\ProyectoITV.Front\MainWindow.xaml:line 1
+   at ProyectoITV.Front.MainWindow..ctor(MainViewModel viewModel) in C:\Users\skyra\RiderProjects\ProyectoITV\ProyectoITV.Front\MainWindow.xaml.cs:line 22
+   at System.Reflection.MethodBaseInvoker.InterpretedInvoke_Constructor(Object obj, IntPtr* args)
+   at System.Reflection.MethodBaseInvoker.InvokeDirectByRefWithFewArgs(Object obj, Span`1 copyOfArgs, BindingFlags invokeAttr)
+   at System.Reflection.MethodBaseInvoker.InvokeWithOneArg(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   at System.Reflection.RuntimeConstructorInfo.Invoke(BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitConstructor(ConstructorCallSite constructorCallSite, RuntimeResolverContext context)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSiteMain(ServiceCallSite callSite, TArgument argument)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.VisitRootCache(ServiceCallSite callSite, RuntimeResolverContext context)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteVisitor`2.VisitCallSite(ServiceCallSite callSite, TArgument argument)
+   at Microsoft.Extensions.DependencyInjection.ServiceLookup.CallSiteRuntimeResolver.Resolve(ServiceCallSite callSite, ServiceProviderEngineScope scope)
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider.CreateServiceAccessor(ServiceIdentifier serviceIdentifier)
+   at System.Collections.Concurrent.ConcurrentDictionary`2.GetOrAdd(TKey key, Func`2 valueFactory)
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider.GetService(ServiceIdentifier serviceIdentifier, ServiceProviderEngineScope serviceProviderEngineScope)
+   at Microsoft.Extensions.DependencyInjection.ServiceProvider.GetService(Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService(IServiceProvider provider, Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService[T](IServiceProvider provider)
+   at ProyectoITV.Front.App.OnStartup(StartupEventArgs e) in C:\Users\skyra\RiderProjects\ProyectoITV\ProyectoITV.Front\App.xaml.cs:line 37
+2026-05-26 23:14:46.526 +02:00 [INF] Aplicacion cerrandose
+2026-05-26 23:15:52.660 +02:00 [INF] Aplicación iniciada
+2026-05-26 23:16:04.312 +02:00 [ERR] Error al guardar cita con id 0
+System.ArgumentException: El DNI del propietario es obligatorio y tiene que ser valido
+   at ProyectoITV.Services.CitaService.ValidarCita(Cita cita) in C:\Users\skyra\RiderProjects\ProyectoITV\ProyectoITV\Services\CitaService.cs:line 73
+   at ProyectoITV.Services.CitaService.Create(Cita cita) in C:\Users\skyra\RiderProjects\ProyectoITV\ProyectoITV\Services\CitaService.cs:line 20
+   at ProyectoITV.Front.MainViewModel.Guardar() in C:\Users\skyra\RiderProjects\ProyectoITV\ProyectoITV.Front\ViewModels\MainViewModel.cs:line 103
+2026-05-26 23:16:12.533 +02:00 [ERR] Error al guardar cita con id 0
+System.ArgumentException: La matricula del vehiculo es obligatoria y tiene que ser valida
+   at ProyectoITV.Services.CitaService.ValidarCita(Cita cita) in C:\Users\skyra\RiderProjects\ProyectoITV\ProyectoITV\Services\CitaService.cs:line 75
+   at ProyectoITV.Services.CitaService.Create(Cita cita) in C:\Users\skyra\RiderProjects\ProyectoITV\ProyectoITV\Services\CitaService.cs:line 20
+   at ProyectoITV.Front.MainViewModel.Guardar() in C:\Users\skyra\RiderProjects\ProyectoITV\ProyectoITV.Front\ViewModels\MainViewModel.cs:line 103
+2026-05-26 23:16:25.248 +02:00 [ERR] Error al guardar cita con id 0
+System.ArgumentException: La fecha de inspeccion es obligatoria y tiene que estar comprendida entre hoy y dentro de 30 dias
+   at ProyectoITV.Services.CitaService.ValidarCita(Cita cita) in C:\Users\skyra\RiderProjects\ProyectoITV\ProyectoITV\Services\CitaService.cs:line 77
+   at ProyectoITV.Services.CitaService.Create(Cita cita) in C:\Users\skyra\RiderProjects\ProyectoITV\ProyectoITV\Services\CitaService.cs:line 20
+   at ProyectoITV.Front.MainViewModel.Guardar() in C:\Users\skyra\RiderProjects\ProyectoITV\ProyectoITV.Front\ViewModels\MainViewModel.cs:line 103
+2026-05-26 23:16:28.702 +02:00 [ERR] Error al guardar cita con id 0
+System.ArgumentException: La fecha de inspeccion es obligatoria y tiene que estar comprendida entre hoy y dentro de 30 dias
+   at ProyectoITV.Services.CitaService.ValidarCita(Cita cita) in C:\Users\skyra\RiderProjects\ProyectoITV\ProyectoITV\Services\CitaService.cs:line 77
+   at ProyectoITV.Services.CitaService.Create(Cita cita) in C:\Users\skyra\RiderProjects\ProyectoITV\ProyectoITV\Services\CitaService.cs:line 20
+   at ProyectoITV.Front.MainViewModel.Guardar() in C:\Users\skyra\RiderProjects\ProyectoITV\ProyectoITV.Front\ViewModels\MainViewModel.cs:line 103
+2026-05-26 23:16:36.104 +02:00 [INF] Cita guardada con éxito
+2026-05-26 23:16:55.108 +02:00 [ERR] Error al guardar cita con id 0
+System.ArgumentException: El DNI del propietario es obligatorio y tiene que ser valido
+   at ProyectoITV.Services.CitaService.ValidarCita(Cita cita) in C:\Users\skyra\RiderProjects\ProyectoITV\ProyectoITV\Services\CitaService.cs:line 73
+   at ProyectoITV.Services.CitaService.Create(Cita cita) in C:\Users\skyra\RiderProjects\ProyectoITV\ProyectoITV\Services\CitaService.cs:line 20
+   at ProyectoITV.Front.MainViewModel.Guardar() in C:\Users\skyra\RiderProjects\ProyectoITV\ProyectoITV.Front\ViewModels\MainViewModel.cs:line 103
+2026-05-26 23:17:04.599 +02:00 [ERR] Error al guardar cita con id 0
+System.ArgumentException: La fecha de matriculacion es obligatoria y tiene que estar comprendida entre el presente y el pasado
+   at ProyectoITV.Services.CitaService.ValidarCita(Cita cita) in C:\Users\skyra\RiderProjects\ProyectoITV\ProyectoITV\Services\CitaService.cs:line 79
+   at ProyectoITV.Services.CitaService.Create(Cita cita) in C:\Users\skyra\RiderProjects\ProyectoITV\ProyectoITV\Services\CitaService.cs:line 20
+   at ProyectoITV.Front.MainViewModel.Guardar() in C:\Users\skyra\RiderProjects\ProyectoITV\ProyectoITV.Front\ViewModels\MainViewModel.cs:line 103
+2026-05-26 23:17:08.704 +02:00 [INF] Cita eliminada correctamente
+2026-05-26 23:17:12.631 +02:00 [INF] Aplicacion cerrandose
+2026-05-26 23:26:36.391 +02:00 [INF] Aplicación iniciada
+2026-05-26 23:38:17.279 +02:00 [INF] Aplicación iniciada
+2026-05-26 23:38:26.745 +02:00 [INF] Aplicacion cerrandose
+2026-05-26 23:50:03.455 +02:00 [INF] Aplicación iniciada

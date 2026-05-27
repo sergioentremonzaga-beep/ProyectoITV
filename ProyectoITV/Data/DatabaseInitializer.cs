@@ -4,8 +4,15 @@ using Microsoft.Data.Sqlite;
 
 namespace ProyectoITV.Data;
 
+/// <summary>
+/// Proporciona el método estáticos para la inicialización de la base de datos
+/// </summary>
 public static class DatabaseInitializer
 {
+    /// <summary>
+    /// Crea la tabla Citas en la base de datos si aún no existe
+    /// </summary>
+    /// <param name="conexion">La interfaz de conexión a la base de datos</param>
     public static void InicializarBd(IDbConnection conexion)
     {
         string sql = """

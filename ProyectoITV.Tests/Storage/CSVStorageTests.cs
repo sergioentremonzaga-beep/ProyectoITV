@@ -37,7 +37,6 @@ public class CSVStorageTests
         
         citas.Should().NotBeNull();
         citas.Should().HaveCount(lista.Count);
-        
         citas.Should().BeEquivalentTo(lista);
     }
 

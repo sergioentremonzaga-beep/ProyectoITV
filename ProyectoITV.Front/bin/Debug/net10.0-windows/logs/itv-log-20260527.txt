@@ -1,0 +1,15 @@
+2026-05-27 00:32:16.618 +02:00 [INF] Aplicacion cerrandose
+2026-05-27 01:18:01.561 +02:00 [INF] Aplicación iniciada
+2026-05-27 01:18:13.473 +02:00 [INF] 
+2026-05-27 01:18:13.473 +02:00 [INF] Cita guardada con éxito
+2026-05-27 01:18:16.843 +02:00 [INF] Aplicacion cerrandose
+2026-05-27 01:18:20.292 +02:00 [INF] Aplicación iniciada
+2026-05-27 01:18:22.942 +02:00 [INF] Aplicacion cerrandose
+2026-05-27 01:37:02.076 +02:00 [INF] Aplicación iniciada
+2026-05-27 01:37:03.855 +02:00 [INF] Aplicacion cerrandose
+2026-05-27 01:37:07.251 +02:00 [INF] Aplicación iniciada
+2026-05-27 01:37:08.565 +02:00 [INF] Aplicacion cerrandose
+2026-05-27 01:37:13.888 +02:00 [INF] Aplicación iniciada
+2026-05-27 01:37:14.905 +02:00 [INF] Aplicacion cerrandose
+2026-05-27 02:45:06.509 +02:00 [INF] Aplicación iniciada
+2026-05-27 02:45:12.154 +02:00 [INF] Aplicacion cerrandose

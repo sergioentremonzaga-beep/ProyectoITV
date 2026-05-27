@@ -2,10 +2,20 @@
 
 namespace ProyectoITV.Storage;
 
+/// <summary>
+/// Gestiona la importación y exportación de ficheros JSON
+/// </summary>
+/// <typeparam name="T">El tipo de objeto a importar y exportar</typeparam>
 public class JSONStorage<T> : IStorage<T>
 {
+    /// <summary>
+    /// Serializa una lista de objetos a un archivo JSON en la ruta especificada
+    /// </summary>
+    /// <param name="datos">Lista de objetos a exportar</param>
+    /// <param name="path">Ruta del archivo donde se guardará el JSON</param>
     public void Exportar(List<T> datos, string path)
     {
+        // Opciones de configuración para que el JSON sea legible
         var json = new JsonSerializerOptions
         {
             WriteIndented = true
@@ -22,6 +32,11 @@ public class JSONStorage<T> : IStorage<T>
         }
     }
 
+    /// <summary>
+    /// Lee un archivo JSON y lo convierte en una lista de objetos
+    /// </summary>
+    /// <param name="path">Ruta del archivo JSON a leer</param>
+    /// <returns>La lista de objetos deserializados o una lista vacía si el archivo no existe o hay error</returns>
     public List<T> Importar(string path)
     {
         if (!File.Exists(path)) return new List<T>();

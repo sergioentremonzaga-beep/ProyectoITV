@@ -4,10 +4,17 @@ using ProyectoITV.Models;
 
 namespace ProyectoITV.Repositories;
 
+/// <summary>
+/// Esta clase gestiona el acceso a datos utilizando EFCore
+/// </summary>
+/// <param name="conexion">La conexión a la base de datos</param>
 public class EfCoreCitaRepository(AppDbContext context) : ICitaRepository
 {
     const int tamañoPagina = 10;
     
+    /// <summary>
+    /// Devuelve una cita específica por su ID
+    /// </summary>
     public Cita? GetById(int id)
     {
         var output =  context.Citas.Find(id);
@@ -16,13 +23,19 @@ public class EfCoreCitaRepository(AppDbContext context) : ICitaRepository
         
         return output;
     }
-
+    
+    /// <summary>
+    /// Inserta una nueva cita en la base de datos
+    /// </summary>
     public void Create(Cita cita)
     {
         context.Citas.Add(cita);
         context.SaveChanges();
     }
 
+    /// <summary>
+    /// Actualiza los datos de una cita
+    /// </summary>
     public void Update(Cita cita, int id)
     {
         var exists = context.Citas.Find(id);
@@ -41,6 +54,10 @@ public class EfCoreCitaRepository(AppDbContext context) : ICitaRepository
         }
     }
     
+    /// <summary>
+    /// Elimina una cita de forma física o lógica
+    /// </summary>
+    /// <param name="borradoLogico">Si es true, cambia IsDeleted a 1 (borrado), si es false, elimina la cita de la base de datos</param>
     public void Delete(int id, bool borradoLogico)
     {
         var exists = context.Citas.Find(id);
@@ -61,9 +78,13 @@ public class EfCoreCitaRepository(AppDbContext context) : ICitaRepository
         }
     }
 
+    /// <summary>
+    /// Realiza una consulta filtrada y con paginación de los resultados
+    /// </summary>
     public List<Cita> Consultar(string? matricula, string? dni, string? marca, string? modelo, TipoMotor? tipoMotor,
         DateTime? fechaPrincipio, DateTime? fechaFinal, int pagina)
     {
+        // Si el parámetro no es nulo lo toma e ignora el OR, en caso de que lo sea toma el nulo
         return context.Citas.
             Where(c => !c.IsDeleted 
                 && ((c.Matricula == matricula) || (string.IsNullOrWhiteSpace(matricula)))
@@ -74,7 +95,7 @@ public class EfCoreCitaRepository(AppDbContext context) : ICitaRepository
             && ((c.FechaInspeccion >= fechaPrincipio) || (!fechaPrincipio.HasValue))
             && ((c.FechaInspeccion <= fechaFinal) || (!fechaFinal.HasValue))).
             OrderBy(c => c.FechaInspeccion).
-            Skip((pagina-1) * tamañoPagina). //Salta las paginas anteriores a la actual (1 para usuario 0 para programa), si entran 10 registros por pagina, salta pagina * 10 registros
+            Skip((pagina-1) * tamañoPagina). // Toma 10 registros por pagina y salta todos los anteriores registros (pagina-1 * 10 = todos los registros a saltar == todas las anteriores páginas)
             Take(tamañoPagina).ToList();
     }
 }
