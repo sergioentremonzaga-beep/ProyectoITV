@@ -29,7 +29,13 @@ public class CitaServiceTests
             FechaMatriculacion = DateTime.Now.AddYears(-2), FechaInspeccion = DateTime.Now.AddDays(+1),
             Motor = TipoMotor.Gasolina
         };
-
+        
+        _mockRepo.Setup(r => r.Consultar(It.IsAny<string>(), null, null, null, null, It.IsAny<DateTime>(), null, 1))
+            .Returns(new List<Cita>());
+        
+        _mockRepo.Setup(r => r.Consultar(null, It.IsAny<string>(), null, null, null, It.IsAny<DateTime>(), null, 1))
+            .Returns(new List<Cita>());
+        
         _servicio.Create(cita);
         
         _mockRepo.Verify(r => r.Create(cita), Times.Once);
@@ -47,7 +53,7 @@ public class CitaServiceTests
         {
             Dni = dni, Matricula = matricula, Marca = marca, Modelo = modelo,
             FechaMatriculacion = DateTime.Now.AddDays(diasMatriculacion), FechaInspeccion = DateTime.Now.AddDays(diasInspeccion),
-            Motor = motor, IsDeleted = false
+            Motor = motor, IsDeleted = deleted
         };
 
         var excepcion = Assert.Throws<ArgumentException>(() => _servicio.Create(cita));
@@ -91,15 +97,19 @@ public class CitaServiceTests
     public void CrearCitaInvalidaLimitePorPersona()
     {
         var dni = "12345678Z";
+        var matricula = "1234ABC";
         var fechaInspeccion = DateTime.Now.AddDays(1);
         
         var cita = new Cita 
         { 
-            Matricula = "1234ABC",
+            Matricula = matricula,
             FechaInspeccion = fechaInspeccion,
             FechaMatriculacion = DateTime.Now.AddDays(-1),
             Dni = dni
         };
+        
+        _mockRepo.Setup(r => r.Consultar(matricula, null, null, null, null, fechaInspeccion, null, 1))
+            .Returns(new List<Cita>());
         
         var lista = new  List<Cita>() {new Cita(), new Cita(), new Cita()};
         

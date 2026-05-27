@@ -23,7 +23,7 @@ public static class DatabaseInitializer
                          FechaInspeccion TEXT NOT NULL,
                          Marca TEXT NOT NULL,
                          Modelo TEXT NOT NULL,
-                         Motor INTEGER  NOT NULL,
+                         Motor INTEGER NOT NULL,
                          FechaMatriculacion TEXT NOT NULL,
                          IsDeleted INTEGER NOT NULL DEFAULT 0,
                          CreatedAt TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,

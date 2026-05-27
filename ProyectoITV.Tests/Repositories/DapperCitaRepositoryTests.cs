@@ -37,7 +37,7 @@ public class DapperCitaRepositoryTests
         var cita = CrearCita("1234ABC");
 
         _repo.Create(cita);
-        var resultado = _repo.GetById(cita.Id);
+        var resultado = _repo.Consultar(cita.Matricula, null, null, null, null, null, null, 1).FirstOrDefault();
 
         resultado.Should().NotBeNull();
     }
@@ -48,7 +48,9 @@ public class DapperCitaRepositoryTests
         var cita = CrearCita("1234ABC");
 
         _repo.Create(cita);
-        var resultado = _repo.GetById(cita.Id);
+        cita.Id = 1;
+        
+        var resultado = _repo.GetById(1);
         
         resultado.Matricula.Should().Be("1234ABC");
     }
@@ -58,12 +60,13 @@ public class DapperCitaRepositoryTests
     {
         var cita = CrearCita("1234ABC");
         _repo.Create(cita);
+        cita.Id = 1;
         
         cita.Marca = "Ford";
         cita.Modelo = "Fiesta";
-        _repo.Update(cita, cita.Id);
+        _repo.Update(cita, 1);
 
-        var resultado = _repo.GetById(cita.Id);
+        var resultado = _repo.GetById(1);
         resultado.Marca.Should().Be("Ford");
         resultado.Modelo.Should().Be("Fiesta");
         resultado.UpdatedAt.Should().NotBeNull();
@@ -74,10 +77,11 @@ public class DapperCitaRepositoryTests
     {
         var cita = CrearCita("1234ABC");
         _repo.Create(cita);
+        cita.Id = 1;
 
-        _repo.Delete(cita.Id,true);
+        _repo.Delete(1,true);
         
-        var resultado = _repo.GetById(cita.Id);
+        var resultado = _repo.GetById(1);
         resultado.Should().NotBeNull();
         resultado.IsDeleted.Should().BeTrue();
     }

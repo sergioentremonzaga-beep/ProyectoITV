@@ -13,3 +13,85 @@
 2026-05-27 01:37:14.905 +02:00 [INF] Aplicacion cerrandose
 2026-05-27 02:45:06.509 +02:00 [INF] Aplicación iniciada
 2026-05-27 02:45:12.154 +02:00 [INF] Aplicacion cerrandose
+2026-05-27 07:38:27.950 +02:00 [INF] Aplicación iniciada
+2026-05-27 07:38:32.296 +02:00 [INF] Cita eliminada correctamente
+2026-05-27 07:39:32.319 +02:00 [ERR] Error al guardar cita con id 0
+System.ArgumentException: El DNI del propietario es obligatorio y tiene que ser valido
+   at ProyectoITV.Services.CitaService.ValidarCita(Cita cita) in C:\Users\skyra\RiderProjects\ProyectoITV\ProyectoITV\Services\CitaService.cs:line 106
+   at ProyectoITV.Services.CitaService.Create(Cita cita) in C:\Users\skyra\RiderProjects\ProyectoITV\ProyectoITV\Services\CitaService.cs:line 34
+   at ProyectoITV.Front.MainViewModel.Create() in C:\Users\skyra\RiderProjects\ProyectoITV\ProyectoITV.Front\ViewModels\MainViewModel.cs:line 131
+2026-05-27 07:39:40.389 +02:00 [ERR] Error al guardar cita con id 0
+System.ArgumentException: El DNI del propietario es obligatorio y tiene que ser valido
+   at ProyectoITV.Services.CitaService.ValidarCita(Cita cita) in C:\Users\skyra\RiderProjects\ProyectoITV\ProyectoITV\Services\CitaService.cs:line 106
+   at ProyectoITV.Services.CitaService.Create(Cita cita) in C:\Users\skyra\RiderProjects\ProyectoITV\ProyectoITV\Services\CitaService.cs:line 34
+   at ProyectoITV.Front.MainViewModel.Create() in C:\Users\skyra\RiderProjects\ProyectoITV\ProyectoITV.Front\ViewModels\MainViewModel.cs:line 131
+2026-05-27 07:39:50.514 +02:00 [ERR] Error al guardar cita con id 0
+System.ArgumentException: La matricula del vehiculo es obligatoria y tiene que ser valida
+   at ProyectoITV.Services.CitaService.ValidarCita(Cita cita) in C:\Users\skyra\RiderProjects\ProyectoITV\ProyectoITV\Services\CitaService.cs:line 108
+   at ProyectoITV.Services.CitaService.Create(Cita cita) in C:\Users\skyra\RiderProjects\ProyectoITV\ProyectoITV\Services\CitaService.cs:line 34
+   at ProyectoITV.Front.MainViewModel.Create() in C:\Users\skyra\RiderProjects\ProyectoITV\ProyectoITV.Front\ViewModels\MainViewModel.cs:line 131
+2026-05-27 07:39:55.442 +02:00 [ERR] Error al guardar cita con id 0
+System.ArgumentException: La matricula del vehiculo es obligatoria y tiene que ser valida
+   at ProyectoITV.Services.CitaService.ValidarCita(Cita cita) in C:\Users\skyra\RiderProjects\ProyectoITV\ProyectoITV\Services\CitaService.cs:line 108
+   at ProyectoITV.Services.CitaService.Create(Cita cita) in C:\Users\skyra\RiderProjects\ProyectoITV\ProyectoITV\Services\CitaService.cs:line 34
+   at ProyectoITV.Front.MainViewModel.Create() in C:\Users\skyra\RiderProjects\ProyectoITV\ProyectoITV.Front\ViewModels\MainViewModel.cs:line 131
+2026-05-27 07:40:05.573 +02:00 [INF] Cita guardada con éxito
+2026-05-27 07:40:10.335 +02:00 [INF] Cita eliminada correctamente
+2026-05-27 07:40:36.536 +02:00 [ERR] Error al guardar cita con id 0
+System.ArgumentException: La fecha de inspeccion es obligatoria y tiene que estar comprendida entre hoy y dentro de 30 dias
+   at ProyectoITV.Services.CitaService.ValidarCita(Cita cita) in C:\Users\skyra\RiderProjects\ProyectoITV\ProyectoITV\Services\CitaService.cs:line 110
+   at ProyectoITV.Services.CitaService.Create(Cita cita) in C:\Users\skyra\RiderProjects\ProyectoITV\ProyectoITV\Services\CitaService.cs:line 34
+   at ProyectoITV.Front.MainViewModel.Create() in C:\Users\skyra\RiderProjects\ProyectoITV\ProyectoITV.Front\ViewModels\MainViewModel.cs:line 131
+2026-05-27 07:40:46.460 +02:00 [ERR] Error al guardar cita con id 0
+System.ArgumentException: La fecha de inspeccion es obligatoria y tiene que estar comprendida entre hoy y dentro de 30 dias
+   at ProyectoITV.Services.CitaService.ValidarCita(Cita cita) in C:\Users\skyra\RiderProjects\ProyectoITV\ProyectoITV\Services\CitaService.cs:line 110
+   at ProyectoITV.Services.CitaService.Create(Cita cita) in C:\Users\skyra\RiderProjects\ProyectoITV\ProyectoITV\Services\CitaService.cs:line 34
+   at ProyectoITV.Front.MainViewModel.Create() in C:\Users\skyra\RiderProjects\ProyectoITV\ProyectoITV.Front\ViewModels\MainViewModel.cs:line 131
+2026-05-27 07:41:00.358 +02:00 [ERR] Error al guardar cita con id 0
+System.ArgumentException: La fecha de matriculacion es obligatoria y tiene que estar comprendida entre el presente y el pasado
+   at ProyectoITV.Services.CitaService.ValidarCita(Cita cita) in C:\Users\skyra\RiderProjects\ProyectoITV\ProyectoITV\Services\CitaService.cs:line 112
+   at ProyectoITV.Services.CitaService.Create(Cita cita) in C:\Users\skyra\RiderProjects\ProyectoITV\ProyectoITV\Services\CitaService.cs:line 34
+   at ProyectoITV.Front.MainViewModel.Create() in C:\Users\skyra\RiderProjects\ProyectoITV\ProyectoITV.Front\ViewModels\MainViewModel.cs:line 131
+2026-05-27 07:41:06.101 +02:00 [INF] Cita guardada con éxito
+2026-05-27 07:41:31.331 +02:00 [INF] Cita guardada con éxito
+2026-05-27 07:41:40.905 +02:00 [INF] Cita eliminada correctamente
+2026-05-27 07:42:06.551 +02:00 [INF] Cita guardada con éxito
+2026-05-27 07:42:09.782 +02:00 [INF] Cita eliminada correctamente
+2026-05-27 07:42:28.921 +02:00 [INF] Cita guardada con éxito
+2026-05-27 07:42:45.261 +02:00 [INF] Cita guardada con éxito
+2026-05-27 07:42:55.175 +02:00 [INF] Cita guardada con éxito
+2026-05-27 07:43:01.087 +02:00 [INF] Cita eliminada correctamente
+2026-05-27 07:43:03.427 +02:00 [INF] Cita eliminada correctamente
+2026-05-27 07:43:06.469 +02:00 [INF] Cita eliminada correctamente
+2026-05-27 07:44:44.302 +02:00 [INF] Cita guardada con éxito
+2026-05-27 07:45:07.922 +02:00 [ERR] Error al actualizar cita con id 13
+System.ArgumentException: El DNI del propietario es obligatorio y tiene que ser valido
+   at ProyectoITV.Services.CitaService.ValidarCita(Cita cita) in C:\Users\skyra\RiderProjects\ProyectoITV\ProyectoITV\Services\CitaService.cs:line 106
+   at ProyectoITV.Services.CitaService.Update(Cita cita, Int32 id) in C:\Users\skyra\RiderProjects\ProyectoITV\ProyectoITV\Services\CitaService.cs:line 67
+   at ProyectoITV.Front.MainViewModel.Update(Cita cita) in C:\Users\skyra\RiderProjects\ProyectoITV\ProyectoITV.Front\ViewModels\MainViewModel.cs:line 190
+2026-05-27 07:45:15.789 +02:00 [ERR] Error al actualizar cita con id 13
+System.ArgumentException: La matricula del vehiculo es obligatoria y tiene que ser valida
+   at ProyectoITV.Services.CitaService.ValidarCita(Cita cita) in C:\Users\skyra\RiderProjects\ProyectoITV\ProyectoITV\Services\CitaService.cs:line 108
+   at ProyectoITV.Services.CitaService.Update(Cita cita, Int32 id) in C:\Users\skyra\RiderProjects\ProyectoITV\ProyectoITV\Services\CitaService.cs:line 67
+   at ProyectoITV.Front.MainViewModel.Update(Cita cita) in C:\Users\skyra\RiderProjects\ProyectoITV\ProyectoITV.Front\ViewModels\MainViewModel.cs:line 190
+2026-05-27 07:45:22.321 +02:00 [ERR] Error al actualizar cita con id 13
+System.ArgumentException: La fecha de inspeccion es obligatoria y tiene que estar comprendida entre hoy y dentro de 30 dias
+   at ProyectoITV.Services.CitaService.ValidarCita(Cita cita) in C:\Users\skyra\RiderProjects\ProyectoITV\ProyectoITV\Services\CitaService.cs:line 110
+   at ProyectoITV.Services.CitaService.Update(Cita cita, Int32 id) in C:\Users\skyra\RiderProjects\ProyectoITV\ProyectoITV\Services\CitaService.cs:line 67
+   at ProyectoITV.Front.MainViewModel.Update(Cita cita) in C:\Users\skyra\RiderProjects\ProyectoITV\ProyectoITV.Front\ViewModels\MainViewModel.cs:line 190
+2026-05-27 07:45:31.394 +02:00 [INF] Cita Actualizada correctamente
+2026-05-27 07:45:38.917 +02:00 [ERR] Error al actualizar cita con id 13
+System.ArgumentException: La fecha de matriculacion es obligatoria y tiene que estar comprendida entre el presente y el pasado
+   at ProyectoITV.Services.CitaService.ValidarCita(Cita cita) in C:\Users\skyra\RiderProjects\ProyectoITV\ProyectoITV\Services\CitaService.cs:line 112
+   at ProyectoITV.Services.CitaService.Update(Cita cita, Int32 id) in C:\Users\skyra\RiderProjects\ProyectoITV\ProyectoITV\Services\CitaService.cs:line 67
+   at ProyectoITV.Front.MainViewModel.Update(Cita cita) in C:\Users\skyra\RiderProjects\ProyectoITV\ProyectoITV.Front\ViewModels\MainViewModel.cs:line 190
+2026-05-27 07:45:49.043 +02:00 [ERR] Error al actualizar cita con id 13
+System.ArgumentException: La matricula del vehiculo es obligatoria y tiene que ser valida
+   at ProyectoITV.Services.CitaService.ValidarCita(Cita cita) in C:\Users\skyra\RiderProjects\ProyectoITV\ProyectoITV\Services\CitaService.cs:line 108
+   at ProyectoITV.Services.CitaService.Update(Cita cita, Int32 id) in C:\Users\skyra\RiderProjects\ProyectoITV\ProyectoITV\Services\CitaService.cs:line 67
+   at ProyectoITV.Front.MainViewModel.Update(Cita cita) in C:\Users\skyra\RiderProjects\ProyectoITV\ProyectoITV.Front\ViewModels\MainViewModel.cs:line 190
+2026-05-27 07:45:58.017 +02:00 [INF] Cita Actualizada correctamente
+2026-05-27 07:46:09.974 +02:00 [INF] Cita Actualizada correctamente
+2026-05-27 07:46:21.595 +02:00 [INF] Cita eliminada correctamente
+2026-05-27 07:46:23.757 +02:00 [INF] Cita eliminada correctamente
+2026-05-27 07:46:40.132 +02:00 [INF] Aplicacion cerrandose

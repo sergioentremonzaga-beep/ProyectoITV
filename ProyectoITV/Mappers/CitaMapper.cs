@@ -24,7 +24,7 @@ public class CitaMapper : IMapper<Cita, CitaDTO>
     /// Convierte un CitaDTO en una Cita
     /// </summary>
     /// <param name="dto">Dto de cita</param>
-    /// <returns>Objeto de modelo de cita</returns>
+    /// <returns>Objeto de modelo    de cita</returns>
     public Cita ToModel(CitaDTO dto)
     {
         return new Cita

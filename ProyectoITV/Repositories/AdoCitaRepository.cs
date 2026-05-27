@@ -41,7 +41,7 @@ public class AdoCitaRepository(SqliteConnection conexion) : ICitaRepository
         command.Parameters.AddWithValue("@Marca", cita.Marca);
         command.Parameters.AddWithValue("@Modelo", cita.Modelo);
         command.Parameters.AddWithValue("@Motor", (int)cita.Motor);
-        command.Parameters.AddWithValue("@FechaMatriculacion", cita.FechaMatriculacion.ToString("yyyy-MM-dd"));
+        command.Parameters.AddWithValue("@FechaMatriculacion", cita.FechaMatriculacion.ToString("o"));
         
         command.ExecuteNonQuery();
     }
@@ -75,6 +75,7 @@ public class AdoCitaRepository(SqliteConnection conexion) : ICitaRepository
         command.Parameters.AddWithValue("@Motor", (int)cita.Motor);
         command.Parameters.AddWithValue("@FechaMatriculacion", cita.FechaMatriculacion.ToString("o"));
         command.Parameters.AddWithValue("@UpdatedAt", DateTime.Now.ToString("o"));
+        command.Parameters.AddWithValue("@IsDeleted", cita.IsDeleted);
         
         command.ExecuteNonQuery();
     }
@@ -100,7 +101,7 @@ public class AdoCitaRepository(SqliteConnection conexion) : ICitaRepository
         }
         else
         {
-            command.CommandText = "DELETE FROM Citas WHERE Id = @id;";
+            command.CommandText = "DELETE FROM Citas WHERE Id = @Id;";
         }
         
         command.Parameters.AddWithValue("@Id", id);

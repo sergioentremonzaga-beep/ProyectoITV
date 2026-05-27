@@ -44,7 +44,6 @@ public class CitaService(ICitaRepository citaRepo) : ICitaService
         if(citasPropietarioMismoDia.Count >= 3) throw new ArgumentException("No pueden registrarse mas de 3 citas para el mismo propietario el mismo dia");
         
         citaRepo.Create(cita);
-        Log.Information("");
     }
 
     /// <summary>
@@ -58,10 +57,12 @@ public class CitaService(ICitaRepository citaRepo) : ICitaService
         if (citaExists == null) throw new ArgumentException("No existe cita para esta id");
         
         // Si el valor recibido es nulo, mantiene el valor de la base de datos
-        cita.Dni ??= citaExists.Dni;
-        cita.Matricula ??= citaExists.Matricula;
-        cita.Marca ??= citaExists.Marca;
-        cita.Modelo ??= citaExists.Modelo;
+        if (string.IsNullOrEmpty(cita.Dni)) cita.Dni = citaExists.Dni;
+        if (string.IsNullOrEmpty(cita.Matricula)) cita.Matricula = citaExists.Matricula;
+        if (string.IsNullOrEmpty(cita.Marca)) cita.Marca = citaExists.Marca;
+        if (string.IsNullOrEmpty(cita.Modelo)) cita.Modelo = citaExists.Modelo;
+        if (cita.FechaInspeccion == default) cita.FechaInspeccion = citaExists.FechaInspeccion;
+        if (cita.FechaMatriculacion == default) cita.FechaMatriculacion = citaExists.FechaMatriculacion;
         
         ValidarCita(cita);
         
